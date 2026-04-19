@@ -13,6 +13,9 @@ lang: zh-TW
 ---
 
 ```{=typst}
+// 章節資料由 scripts/build-toc.py 自動生成（來源：chapters.yml + book.pdf outline）
+#import "_toc-data.typ": toc-parts
+
 #set text(lang: "zh", region: "tw")
 #set par(justify: true, leading: 0.8em, spacing: 0.9em)
 #set page(numbering: "1")
@@ -29,95 +32,65 @@ lang: zh-TW
 
 #v(1.2em)
 
-// 章節條目（樣式 helper）
-#let toc-part(label) = block(
-  above: 1.4em,
-  below: 0.6em,
-  text(font: "GenRyuMin2 TW SB", size: 11pt, fill: luma(30%), label)
-)
+// ── 樣式 helpers ─────────────────────────────
 
-#let toc-ch(num, title, status: "planned") = {
-  let status-tag = if status == "pilot" {
-    text(size: 8pt, fill: rgb("#2a7"))[ · pilot]
+#let status-tag(status) = {
+  if status == "pilot" {
+    text(size: 8pt, fill: rgb("#2a7"))[pilot]
   } else if status == "drafted" {
-    text(size: 8pt, fill: luma(55%))[ · drafted]
+    text(size: 8pt, fill: luma(55%))[drafted]
   } else {
-    text(size: 8pt, fill: luma(65%))[ · planned]
+    text(size: 8pt, fill: luma(65%))[planned]
   }
-  block(
-    above: 0.3em,
-    below: 0.2em,
-    [
-      #box(width: 2em)[#text(weight: "bold")[#num]]
-      #text(weight: "bold")[#title]
-      #status-tag
-    ]
-  )
 }
 
-#let toc-section(text-body) = block(
-  above: 0.1em,
-  below: 0.25em,
-  inset: (left: 2em),
-  text(size: 9pt, fill: luma(40%), text-body)
+#let page-number(page) = {
+  if page == none {
+    text(size: 9pt, fill: luma(75%))[—]
+  } else {
+    text(size: 9.5pt, weight: "semibold", fill: luma(25%))[#page]
+  }
+}
+
+#let part-header(name) = block(
+  above: 1.4em,
+  below: 0.6em,
+  text(font: "GenRyuMin2 TW SB", size: 11pt, fill: luma(30%), name)
 )
 
-// ─────────────────────────────────────────
+// 一列：編號、標題、leader dots、status tag、頁碼
+#let chapter-row(num, title, status, page) = block(
+  above: 0.5em,
+  below: 0.15em,
+  grid(
+    columns: (2.4em, auto, 1fr, 3.4em, 1.8em),
+    column-gutter: 0.6em,
+    align: (right + horizon, left + horizon, center + horizon, right + horizon, right + horizon),
+    text(weight: "bold")[#num],
+    text(weight: "bold")[#title],
+    box(width: 100%)[#repeat[#text(fill: luma(80%))[.]]],
+    status-tag(status),
+    page-number(page),
+  )
+)
 
-#toc-part[第一部　從原子到分子]
+#let chapter-subtitle(subtitle) = pad(
+  top: 0em,
+  bottom: 0.35em,
+  left: 3em,
+  right: 0.5em,
+  text(size: 9pt, fill: luma(40%), subtitle),
+)
 
-#toc-ch("1.", "原子習慣的盲點", status: "pilot")
-#toc-section[21 天神話、計畫式介入的效應量、意圖—行動鴻溝、coping planning 範本]
+// ── 展開目次 ─────────────────────────────────
 
-#toc-ch("2.", "習慣的分子結構", status: "pilot")
-#toc-section[分子 = 情境原子 × 神經原子 × 社會原子；三原子鎖死與反彈機制]
-
-#toc-part[第二部　神經發展的新科學]
-
-#toc-ch("3.", "前額葉 vs 基底核", status: "pilot")
-#toc-section[慢車手動檔 vs 自動駕駛、壓力如何換手、caudate／posterior putamen、病理的那一端]
-
-#toc-ch("4.", "多巴胺預測誤差", status: "planned")
-#toc-section[動機不是「想要」，是「比預期多了多少」；如何設獎勵結構]
-
-#toc-ch("5.", "睡眠、情緒與鞏固", status: "planned")
-#toc-section[夜晚才是習慣真正寫入的時候；REM、慢波睡眠與程序性記憶]
-
-#toc-ch("6.", "神經可塑性的窗口期", status: "planned")
-#toc-section[20 歲不是大腦的終點；成人期的學習敏感性與限制]
-
-#toc-part[第三部　心理學的再認識]
-
-#toc-ch("7.", "自我決定理論", status: "planned")
-#toc-section[自主、勝任、連結：動機的三根柱子與它們之間的權衡]
-
-#toc-ch("8.", "執行功能與認知負荷", status: "planned")
-#toc-section[為什麼壓力大時習慣會瓦解；工作記憶、注意力、自我調節]
-
-#toc-ch("9.", "情境線索與自動化迴路", status: "planned")
-#toc-section[Cue–Routine–Reward 的 2020 後修正版；線索的階層]
-
-#toc-ch("10.", "身份認同與行為選擇", status: "planned")
-#toc-section[「我是誰」如何決定「我會做什麼」；身份—情境—社會的共變]
-
-#toc-part[第四部　社會學視角]
-
-#toc-ch("11.", "關係網絡", status: "planned")
-#toc-section[社會傳染的最新證據與質疑；從伴侶到村落的因果分離]
-
-#toc-ch("12.", "結構性習慣", status: "planned")
-#toc-section[階級、空間、時間對個人行為的強制；通勤、工時、住宅設計]
-
-#toc-ch("13.", "文化慣性與個體反叛", status: "planned")
-#toc-section[習慣的制度面；規則如何內化為分子、又如何被解構]
-
-#toc-part[第五部　分子習慣實踐]
-
-#toc-ch("14.", "六週實驗手冊", status: "planned")
-#toc-section[把前 13 章壓縮成可以跑的個人實驗：週次、紀錄表、修正協議]
-
-#toc-ch("15.", "從個人到共同體", status: "planned")
-#toc-section[為什麼一個人的習慣改變很難獨立成立；共修、社群、制度槓桿]
+#for part in toc-parts {
+  part-header(part.name)
+  for ch in part.chapters {
+    chapter-row(ch.num, ch.title, ch.status, ch.page)
+    chapter-subtitle(ch.subtitle)
+  }
+}
 
 #v(1.2em)
 
@@ -129,9 +102,11 @@ lang: zh-TW
 
 #text(size: 8.5pt, fill: luma(45%))[
   *狀態標記*：
-  #text(fill: rgb("#2a7"))[pilot] ＝ 完成並於 v0.1 pilot release 釋出；
+  #text(fill: rgb("#2a7"))[pilot] ＝ 本 release 已釋出並帶實際頁碼（數字由 PDF outline 自動抽取）；
   #text(fill: luma(55%))[drafted] ＝ 初稿完成待審；
   #text(fill: luma(65%))[planned] ＝ 結構已定、內容待寫。
+
+  頁碼取自 `_book/book.pdf` outline（由 Typst 自動從各章 H1 生成，經 `mutool show outline` 抽出），保證和實際 PDF 一致。
 
   全書預計 280-320 頁（A5, 9pt）；所有學術引用於最終 release 前經 CrossRef API 驗證。
 ]

@@ -2,8 +2,7 @@
 _book/
 .quarto/
 *.pdf
+_toc-data.typ
 
 # macOS
 .DS_Store
-
-/.quarto/

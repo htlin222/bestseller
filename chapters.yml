@@ -1,0 +1,68 @@
+# 全書章節主檔。
+# build-toc.py 會把這份清單和 book.pdf 實際的 outline 比對：
+#   - 標題能在 PDF outline 找到 → 取實際頁碼、標狀態為該 chapter 的 status
+#   - 找不到 → 視為 planned，無頁碼
+#
+# 每次新增一章：在這裡加一筆 + 寫 NN.qmd + book.qmd include。
+# 章名要和 .qmd 裡的 H1 精準一致（mutool 以字串比對）。
+
+parts:
+  - name: "第一部　從原子到分子"
+    chapters:
+      - num: 1
+        title: "第一章 原子習慣的盲點"
+        subtitle: "21 天神話、計畫式介入的效應量、意圖—行動鴻溝、coping planning 範本"
+      - num: 2
+        title: "第二章 習慣的分子結構"
+        subtitle: "分子 = 情境原子 × 神經原子 × 社會原子；三原子鎖死與反彈機制"
+
+  - name: "第二部　神經發展的新科學"
+    chapters:
+      - num: 3
+        title: "第三章 前額葉 vs 基底核"
+        subtitle: "慢車手動檔 vs 自動駕駛、壓力如何換手、caudate／posterior putamen、病理的那一端"
+      - num: 4
+        title: "第四章 多巴胺預測誤差"
+        subtitle: "動機不是「想要」，是「比預期多了多少」；如何設獎勵結構"
+      - num: 5
+        title: "第五章 睡眠、情緒與鞏固"
+        subtitle: "夜晚才是習慣真正寫入的時候；REM、慢波睡眠與程序性記憶"
+      - num: 6
+        title: "第六章 神經可塑性的窗口期"
+        subtitle: "20 歲不是大腦的終點；成人期的學習敏感性與限制"
+
+  - name: "第三部　心理學的再認識"
+    chapters:
+      - num: 7
+        title: "第七章 自我決定理論"
+        subtitle: "自主、勝任、連結：動機的三根柱子與它們之間的權衡"
+      - num: 8
+        title: "第八章 執行功能與認知負荷"
+        subtitle: "為什麼壓力大時習慣會瓦解；工作記憶、注意力、自我調節"
+      - num: 9
+        title: "第九章 情境線索與自動化迴路"
+        subtitle: "Cue–Routine–Reward 的 2020 後修正版；線索的階層"
+      - num: 10
+        title: "第十章 身份認同與行為選擇"
+        subtitle: "「我是誰」如何決定「我會做什麼」；身份—情境—社會的共變"
+
+  - name: "第四部　社會學視角"
+    chapters:
+      - num: 11
+        title: "第十一章 關係網絡"
+        subtitle: "社會傳染的最新證據與質疑；從伴侶到村落的因果分離"
+      - num: 12
+        title: "第十二章 結構性習慣"
+        subtitle: "階級、空間、時間對個人行為的強制；通勤、工時、住宅設計"
+      - num: 13
+        title: "第十三章 文化慣性與個體反叛"
+        subtitle: "習慣的制度面；規則如何內化為分子、又如何被解構"
+
+  - name: "第五部　分子習慣實踐"
+    chapters:
+      - num: 14
+        title: "第十四章 六週實驗手冊"
+        subtitle: "把前 13 章壓縮成可以跑的個人實驗：週次、紀錄表、修正協議"
+      - num: 15
+        title: "第十五章 從個人到共同體"
+        subtitle: "為什麼一個人的習慣改變很難獨立成立；共修、社群、制度槓桿"
