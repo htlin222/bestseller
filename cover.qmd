@@ -1,0 +1,27 @@
+---
+title: ""
+format:
+  typst:
+    papersize: a5
+    margin:
+      x: 22mm
+      y: 28mm
+    mainfont: "GenRyuMin2 TW R"
+    fontsize: 10pt
+lang: zh-TW
+---
+
+```{=typst}
+#set page(numbering: none, footer: none, header: none)
+
+#v(1.2fr)
+#align(center)[
+  #text(font: "GenRyuMin2 TW B", size: 34pt, tracking: 0.1em)[分子習慣]
+  #v(1.4em)
+  #text(size: 13pt, fill: luma(40%))[從原子再下一層，用情境、神經、社會三層設計真正留得下來的習慣]
+]
+#v(2.4fr)
+#align(center)[
+  #text(size: 11pt)[Claude（共同撰寫）]
+]
+```

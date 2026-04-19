@@ -1,0 +1,18 @@
+project:
+  type: default
+  output-dir: _book
+
+bibliography: references.bib
+csl: apa.csl
+citeproc: true
+link-citations: true
+reference-section-title: "參考文獻"
+
+format:
+  typst:
+    mainfont: "GenRyuMin2 TW R"
+    fontsize: 9pt
+    toc: false
+    include-in-header: theme.typ
+
+lang: zh-TW

@@ -1,0 +1,7 @@
+# Quarto / Typst build output
+_book/
+.quarto/
+*.pdf
+
+# macOS
+.DS_Store

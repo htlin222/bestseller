@@ -1,0 +1,47 @@
+---
+title: ""
+---
+
+```{=typst}
+#let book-title = "分子習慣"
+
+// ── 內頁版面：裝訂 + 奇偶頁碼分左右下角 + 跑動頁首 ──
+#set page(
+  paper: "a5",
+  binding: left,
+  margin: (inside: 24mm, outside: 16mm, top: 22mm, bottom: 20mm),
+  numbering: none,
+  header: context {
+    let n = counter(page).get().first()
+    let h1s = query(heading.where(level: 1))
+    // 章首頁不顯示 header
+    if h1s.any(h => h.location().page() == here().page()) { return }
+    let before = h1s.filter(h => h.location().page() < here().page())
+    let current = if before.len() > 0 { before.last().body } else { none }
+    if current == none { return }
+    set text(size: 8pt, fill: luma(45%))
+    if calc.odd(n) {
+      align(right)[#current]
+    } else {
+      align(left)[#current]
+    }
+  },
+  footer: context {
+    let n = counter(page).get().first()
+    set text(size: 9pt, fill: luma(40%))
+    if calc.odd(n) {
+      align(right)[#n]
+    } else {
+      align(left)[#n]
+    }
+  },
+)
+```
+
+{{< include index.qmd >}}
+
+{{< include 01.qmd >}}
+
+{{< include 02.qmd >}}
+
+{{< include 03.qmd >}}
